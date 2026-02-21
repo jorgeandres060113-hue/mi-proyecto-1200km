@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Para mi chica </title>
+    <style>
+        :root {
+            --pucca-red: #e60000;
+            --dark-bg: #0a0a0a;
+            --tulip-pink: #ff8da1;
+            --text-gray: #e0e0e0;
+            --gold: #ffd700;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('Fotos/Fondo.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            color: var(--text-gray);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            color: var(--pucca-red);
+            font-size: 3rem;
+            text-shadow: 2px 2px 10px rgba(230, 0, 0, 0.5);
+            margin-bottom: 10px;
+        }
+
+        .counter-section {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 5px solid var(--pucca-red);
+            margin: 30px 0;
+            backdrop-filter: blur(5px);
+        }
+
+        .pucca-img {
+            width: 80px;
+            margin: 20px auto;
+            display: block;
+        }
+
+        /* Botones */
+        .btn-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .btn-regalo, .btn-libro {
+            color: white;
+            padding: 20px 40px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn-regalo {
+            background-color: var(--pucca-red);
+            box-shadow: 0 0 15px var(--pucca-red);
+        }
+
+        .btn-libro {
+            background-color: #4a148c; /* Morado elegante para el libro */
+            box-shadow: 0 0 15px #4a148c;
+        }
+
+        .btn-regalo:hover, .btn-libro:hover {
+            transform: scale(1.1);
+        }
+
+        /* Modales */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95);
+            overflow-y: auto;
+            padding-top: 50px;
+        }
+
+        .modal-content-libro {
+            max-width: 700px;
+            margin: 0 auto 50px;
+            background: rgba(20, 20, 20, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--tulip-pink);
+            text-align: left;
+            line-height: 1.8;
+            box-shadow: 0 0 30px rgba(255, 141, 161, 0.2);
+        }
+
+        .gallery-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        .gallery-content img, .gallery-content video {
+            width: 100%;
+            border-radius: 10px;
+            border: 2px solid var(--tulip-pink);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px; right: 30px;
+            color: white; font-size: 40px; cursor: pointer;
+        }
+
+        .chapter-title {
+            color: var(--tulip-pink);
+            font-size: 1.4rem;
+            margin-top: 30px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        audio {
+            margin-top: 20px;
+            width: 100%;
+            filter: invert(100%);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <img src="Fotos/Pucca y Garu.jpg" class="pucca-img" alt="Pucca">
+            <h1>Feliz día- 10/02/2026 Meloncito 💗</h1>
+            <p><i>"Los regalos se rompen, pero las historias se quedan para siempre."</i></p>
+        </header>
+
+        <section class="counter-section">
+            <h2 id="counter-text">1200 km nos separan, pero cada noche juntos estamos más unidos</h2>
+        </section>
+
+        <section>
+            <h3 style="color: var(--tulip-pink);">Nuestra Canción</h3>
+            <audio controls autoplay loop>
+                <source src="Audio/Arisita.mp3" type="audio/mpeg">
+                Tu navegador no soporta el audio.
+            </audio>
+        </section>
+
+        <div class="btn-container">
+            <button class="btn-libro" onclick="openLibro()">NUESTRA HISTORIA 📖</button>
+            <button class="btn-regalo" onclick="openModal()">GALERÍA DE RECUERDOS 🎁</button>
+        </div>
+    </div>
+
+    <div id="modalLibro" class="modal">
+        <span class="close-btn" onclick="closeLibro()">&times;</span>
+        <div class="modal-content-libro">
+            <h2 style="color: var(--pucca-red); text-align: center; font-size: 2rem;">Más allá de los 1200 KM</h2>
+            <p style="text-align: center; font-style: italic;">"Esto es para ti, por tus 20 años, para que nunca olvides cómo empezamos."</p>
+            <hr style="border: 0; border-top: 1px solid rgba(255,255,255,0.1); margin: 20px 0;">
+
+            <div class="chapter-title">Capítulo 1: El Comienzo de Todo</div>
+            <p>Todo empezó como una distracción, un usuario más en una pantalla. Pero pronto, esos mensajes se convirtieron en la primera cosa que quería leer al despertar. Fue el momento en que dejamos de ser extraños para convertirnos en el refugio del otro, sin importar la latencia ni la distancia.</p>
+
+            <div class="chapter-title">Capítulo 2: Una Amistad que Rompió Barreras</div>
+            <p>Antes de cualquier otra cosa, fuimos cómplices. Aprendimos a conocernos sin vernos, a entendernos sin tocarnos. Las barreras geográficas se quedaron pequeñas ante las horas de charlas, las risas compartidas y esa confianza que solo se encuentra una vez en la vida.</p>
+
+            <div class="chapter-title">Capítulo 3: Un Sentimiento que se hizo Fuerte</div>
+            <p>Lo que empezó como una conexión digital se transformó en algo que ya no podíamos ignorar. El corazón no entiende de mapas ni de fronteras; solo entiende de quién lo hace latir más rápido. Y ahí estabas tú, del otro lado de la pantalla, volviéndote mi prioridad absoluta.</p>
+
+            <div class="chapter-title">Capítulo 4: El Deseo de un Encuentro</div>
+            <p>Este capítulo aún no se termina de escribir con tinta, pero se escribe cada día con ganas. Es el sueño de acortar los kilómetros, de que el "hola" ya no sea por audio, sino de frente. Es la promesa de que todo este tiempo esperando valdrá la pena en el segundo en que por fin estemos en el mismo lugar.</p>
+
+            <div class="chapter-title">Capítulo 5: 1200 KM de Insomnio</div>
+            <p>Llegamos a tus 20 años. Quizás hoy no estoy ahí para darte el abrazo que te debo, pero estoy en cada palabra de este código y en cada nota de nuestra canción. No importa la distancia, cada noche juntos estamos más unidos. Felices 20, Melón.</p>
+
+            <div class="chapter-title">Capítulo 6: El Laberinto de las Palabras</div>
+            <p>A veces, el silencio no es ausencia, es protección. Me enseñaste que ser impulsiva es parte de tu fuego, y que cuando te encierras en tu frase de "hablamos cuando me sienta mejor", no estás huyendo de mí, estás cuidándonos de tus propias palabras. Entendí que amarte también es respetar tus retiros y tus batallas contra esos problemas que, para mí, nunca serán bobadas si te duelen a ti.</p>
+
+            <div class="chapter-title">Capítulo 7: Espejos y Karmas</div>
+            <p>Me hablaste de pasados que muerden y de situaciones que hoy se sienten como un eco. Me confesaste tus miedos: el miedo a que yo te trate diferente o que me aleje al conocer tu carácter. Pero ver tu verdad, sin filtros, solo me hizo admirar más a la mujer que eres. No busco a alguien perfecta, te busco a ti.</p>
+
+            <div class="chapter-title">Capítulo 8: El Compromiso del "No Cambiar"</div>
+            <p>"Tú sí lo vas a hacer", me dijiste con ese miedo de quien ha sido defraudado. Pero aquí sigo, escuchando tus audios y procesando cada pensamiento. Prometí no tratarte diferente, y cumplo. Tu verdad no me lastima; la verdad es lo único que nos hace reales.</p>
+
+            <div class="chapter-title">Capítulo 9: El Espejo del Pasado</div>
+            <p>Me confesaste que antes no entendías a quienes hablaban con tanto afecto sabiendo que no estarían juntos. Aprendimos que el cariño no siempre sigue la lógica de los mapas, y que a veces, lo que más nos gusta de alguien es precisamente lo que nos hace dudar.</p>
+
+            <div class="chapter-title">Capítulo 10: Señales en el Insomnio</div>
+            <p>"Cada video que veas, tómalo como una señal", me dijiste. Entre videos y mensajes a las 6 de la mañana, encontramos nuestro lenguaje. Esos momentos donde la guardia baja son los cimientos de lo que somos hoy. Me pediste que no cambiara, y mi respuesta sigue siendo la misma: aquí estaré.</p>
+
+            <div class="chapter-title">Capítulo 11: La Incertidumbre Feliz</div>
+            <p>"¿Qué sucederá después? Ni yo sé", fue tu respuesta. Y en ese "no sé" encontré paz. No tenemos todas las respuestas, pero mientras tanto, me quedo con tu tranquilidad después de haber soltado lo que tenías guardado. Estoy feliz por ti, por nosotros, y porque a pesar de las dudas, te quiero un poquito más.</p>
+            
+            <br><br>
+            <p style="text-align: center; color: var(--tulip-pink); font-weight: bold;">[ Continúa... ]</p>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <h2 style="color: var(--tulip-pink); text-align: center;">Tú, mi mejor recuerdo</h2>
+        <div class="gallery-content">
+            <img src="Fotos/Tu.jpg" alt="Ari 1">
+            <img src="Fotos/tu1.jpg" alt="Ari 2">
+            <video controls><source src="Video/document_4929695374232258111.mp4" type="video/mp4"></video>
+            <img src="Fotos/tu2.jpg" alt="Ari 3">
+            <video controls><source src="Video/document_4935950508767577674.mp4" type="video/mp4"></video>
+            <video controls><source src="Video/document_4935950508767577675.mp4" type="video/mp4"></video>
+            <img src="Fotos/Ella.jpg" alt="Ari 4">
+            <img src="Fotos/Hermosa.jpg" alt="Ari 5">
+            <img src="Fotos/Jorgee.jpg" alt="Ari 6">
+            <img src="Fotos/JOrge.jpg" alt="Ari 7">
+            <img src="Fotos/Jorge2.jpg" alt="Ari 8">
+            <img src="Fotos/jorgecuello.jpg" alt="Ari 9">
+            <img src="Fotos/Cuellojoge.jpg" alt="Ari 10">
+            <img src="Fotos/Sombrero.jpg" alt="Ari 11">
+            <img src="Fotos/Sonrrisa.jpg" alt="Ari 12">
+            <img src="Fotos/Ojo.jpg" alt="Ari 13">
+            <img src="Fotos/Mis labios.jpg" alt="Ari 14">
+            <img src="Fotos/Espacial.jpg" alt="Ari 15">
+            <video controls><source src="Video/document_4935950508767577679.mp4" type="video/mp4"></video>
+        </div>
+    </div>
+
+    <script>
+        function openModal() {
+            document.getElementById("myModal").style.display = "block";
+        }
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+        }
+        function openLibro() {
+            document.getElementById("modalLibro").style.display = "block";
+        }
+        function closeLibro() {
+            document.getElementById("modalLibro").style.display = "none";
+        }
+    </script>
+</body>
+</html>
